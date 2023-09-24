@@ -1,0 +1,24 @@
+.my-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Example box shadow values, you can adjust as needed */
+  transition: box-shadow 0.3s ease; /* Optional transition for a smooth effect when the shadow changes */
+  font-size: 1.5rem;
+}
+
+.my-grid {
+  margin-top: 5%;
+}
+.ui.image {
+  border-radius: 0.28571429rem;
+}
+
+app-footer {
+  margin-top: 5rem;
+  // position: absolute;
+  // bottom: 0;
+  // right: 0;
+  // left: 0;
+}
+
+h2.ui.header {
+  font-size: 2.5rem;
+}

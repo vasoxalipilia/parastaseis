@@ -1,0 +1,35 @@
+<div class="ui container">
+  <h2>
+    {{ title.first }}
+  </h2>
+  <p class="secondary">
+    {{ title.secondary }}
+  </p>
+</div>
+<div class="ui container">
+  <div class="carousel">
+    <div class="ui three stackable cards">
+      <div
+        *ngFor="let event of events"
+        class="card"
+        (click)="navigateToLink(event)"
+      >
+        <div class="image">
+          <img [src]="event.simpleImage" alt="Card Image" />
+        </div>
+        <div class="content">
+          <div class="header">{{ event.title }}</div>
+          <div class="description">
+            {{ event.description | slice : 0 : 100 }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="ui icon button left" (click)="scroll(-1)">
+      <i class="chevron circle left icon"></i>
+    </button>
+    <button class="ui icon button right" (click)="scroll(1)">
+      <i class="chevron circle right icon"></i>
+    </button>
+  </div>
+</div>

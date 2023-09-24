@@ -1,0 +1,248 @@
+<form [formGroup]="eventForm" class="ui form">
+  <div class="field">
+    <div class="fields">
+      <div
+        class="six wide field"
+        [ngClass]="{
+          error:
+            eventForm.get('title')!.invalid &&
+            (eventForm.get('title')!.dirty ||
+              eventForm.get('title')!.touched ||
+              isSubmitted)
+        }"
+      >
+        <label>Τίτλος</label>
+
+        <input
+          type="text"
+          formControlName="title"
+          name="title"
+          placeholder="Τίτλος"
+        />
+      </div>
+      <div class="six wide field">
+        <label>Κατηγορία</label>
+        <div
+          class="field"
+          [ngClass]="{
+            error: category.value === '' && isSubmitted
+          }"
+        >
+          <select #category class="ui fluid search dropdown" name="month">
+            <option value="">Κατηγορία</option>
+            <option value="Movies">Movies</option>
+            <option value="Music">Music</option>
+            <option value="event">event</option>
+            <option value="New">New</option>
+            <option value="Popular">Popular</option>
+            <option value="Recommended">Recommended</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <div class="fields">
+      <div
+        class="eight wide field"
+        [ngClass]="{
+          error: description.value === '' && isSubmitted
+        }"
+      >
+        <label>Περιγραφή.....</label>
+        <input type="hidden" name="description" placeholder="Περιγραφή....." />
+
+        <textarea
+          #description
+          id="story"
+          name="story"
+          rows="5"
+          cols="33"
+          placeholder="Περιγραφή....."
+        ></textarea>
+      </div>
+      <div
+        class="four wide field"
+        [ngClass]="{
+          error:
+            eventForm.get('location')!.invalid &&
+            (eventForm.get('location')!.dirty ||
+              eventForm.get('location')!.touched ||
+              isSubmitted)
+        }"
+      >
+        <label>Τοποθεσία</label>
+        <input
+          type="text"
+          formControlName="location"
+          name="location"
+          placeholder="Τοποθεσία"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="fields">
+      <div
+        class="four wide field"
+        [ngClass]="{
+          error:
+            eventForm.get('day')!.invalid &&
+            (eventForm.get('day')!.dirty ||
+              eventForm.get('day')!.touched ||
+              isSubmitted)
+        }"
+      >
+        <label>Ημέρα</label>
+        <input
+          type="text"
+          pattern="\d*"
+          min="1"
+          max="31"
+          maxlength="2"
+          formControlName="day"
+          name="day"
+          placeholder="Ημέρα"
+        />
+      </div>
+
+      <div class="four wide field">
+        <label>Μήνας</label>
+        <div
+          class="field"
+          [ngClass]="{
+            error: month.value === '' && isSubmitted
+          }"
+        >
+          <select #month class="ui fluid search dropdown" name="month">
+            <option value="">Μήνας</option>
+            <option value="1">Ιανουάριος</option>
+            <option value="2">Φεβρουάριος</option>
+            <option value="3">Μάρτιος</option>
+            <option value="4">Απρίλιος</option>
+            <option value="5">Μάιος</option>
+            <option value="6">Ιούνιος</option>
+            <option value="7">Ιούλιος</option>
+            <option value="8">Αύγουστος</option>
+            <option value="9">Σεπτέβριος</option>
+            <option value="10">Οκτώβριος</option>
+            <option value="11">Νοέμβριος</option>
+            <option value="12">Δεκέμβριος</option>
+          </select>
+        </div>
+      </div>
+      <div
+        class="four wide field"
+        [ngClass]="{
+          error:
+            eventForm.get('year')!.invalid &&
+            (eventForm.get('year')!.dirty ||
+              eventForm.get('year')!.touched ||
+              isSubmitted)
+        }"
+      >
+        <label>Έτος</label>
+
+        <input
+          type="text"
+          pattern="\d*"
+          formControlName="year"
+          name="year"
+          min="2023"
+          maxlength="4"
+          placeholder="Έτος"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="fields">
+      <div
+        class="six wide field"
+        [ngClass]="{
+          error: !selectedSimpleImageName && isSubmitted
+        }"
+      >
+        <label>Ανέβασμα Φωτογραφίας</label>
+        <div class="column">
+          <div
+            class="ui segment"
+            [ngClass]="{
+              error: !selectedSimpleImageName && isSubmitted
+            }"
+          >
+            <div class="ui header">Εικόνα τετράγωνη</div>
+            <div class="ui action input">
+              <input
+                #simplePhoto
+                type="file"
+                (change)="onSimplePhotoChange($event)"
+              />
+              <button
+                class="ui inverted purple button"
+                (click)="triggerSimplePhotoInput()"
+              >
+                Upload
+              </button>
+            </div>
+            <div class="ui message" *ngIf="isSimplePhotoSelected">
+              <p>File selected: {{ selectedSimpleImageName }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="six wide field"
+        [ngClass]="{
+          error: !selectedCoverImageName && isSubmitted
+        }"
+      >
+        <label>Ανέβασμα Φωτογραφίας</label>
+        <div class="column">
+          <div
+            class="ui segment"
+            [ngClass]="{
+              error: !selectedCoverImageName && isSubmitted
+            }"
+          >
+            <div class="ui header">Εικόνα παραλληλόγραμμη</div>
+            <div class="ui action input">
+              <input
+                #coverPhoto
+                type="file"
+                (change)="onCoverPhotoChange($event)"
+              />
+              <button
+                class="ui inverted purple button"
+                (click)="triggerCoverPhotoInput()"
+              >
+                Upload
+              </button>
+            </div>
+            <div class="ui message" *ngIf="isCoverPhotoSelected">
+              <p>File selected: {{ selectedCoverImageName }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-wrapper">
+    <div
+      class="ui button purple right"
+      (click)="submit(eventForm)"
+      tabindex="0"
+    >
+      Αποθήκευση
+    </div>
+  </div>
+  <div
+    *ngIf="(eventForm.invalid && isSubmitted) || errorReturned"
+    class="ui error message"
+  >
+    Υπάρχουν κάποια λάθη!!
+  </div>
+</form>

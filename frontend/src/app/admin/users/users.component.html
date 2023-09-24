@@ -1,0 +1,49 @@
+<div class="container">
+  <table class="ui stripped table">
+    <thead>
+      <tr>
+        <th>FirsName</th>
+        <th>LastName</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.username }}</td>
+        <td class="ui center aligned">
+          <div class="six wide field">
+            <div class="field">
+              <select #role class="ui fluid search dropdown" name="role">
+                <option value="">{{ user.role }}</option>
+                <option value="admin">admin</option>
+                <option value="organizer">organizer</option>
+                <option value="user">user</option>
+              </select>
+            </div>
+          </div>
+        </td>
+
+        <!-- <button
+          *ngIf="user.role === 'admin'"
+          class="ui large purple button my-button"
+          (click)="makeUser(user)"
+          >
+          Κάνε Χρήστη
+        </button> -->
+
+        <td>
+          <button
+            class="ui large purple button my-button"
+            (click)="changeRole(user, role.value)"
+          >
+            Άλλαξε Ρόλο
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

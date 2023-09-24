@@ -1,0 +1,25 @@
+<section id="hero">
+  <app-header></app-header>
+  <app-hero></app-hero>
+</section>
+
+<app-secondary-header *ngIf="!isSmallScreen"></app-secondary-header>
+<section id="popular">
+  <app-secondary-header *ngIf="isSmallScreen"></app-secondary-header>
+  <app-popular></app-popular>
+</section>
+<section id="recommended">
+  <app-recommended></app-recommended>
+</section>
+<section id="news">
+  <app-news></app-news>
+</section>
+<section id="theatre">
+  <app-theatre></app-theatre>
+</section>
+<section id="music">
+  <app-music></app-music>
+</section>
+<section>
+  <app-footer></app-footer>
+</section>

@@ -1,0 +1,25 @@
+<app-header></app-header>
+<app-breadcrumb></app-breadcrumb>
+<div class="ui container table-wrapper">
+  <table class="ui striped table">
+    <thead>
+      <tr>
+        <th>Ημερομηνία</th>
+        <th>Τιμή</th>
+        <th>Εισιτήριο</th>
+        <th>Event</th>
+        <th>Κατηγορία</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let shipping of shippings">
+        <td>{{ shipping.ticket!.time }} {{ shipping.ticket!.date }}</td>
+        <td>{{ shipping.ticket!.price }} &euro;</td>
+        <td>{{ shipping.ticket!.socialType }}</td>
+        <td>{{ shipping.ticket!.event.title }}</td>
+        <td>{{ shipping.ticket!.event.category }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-footer></app-footer>

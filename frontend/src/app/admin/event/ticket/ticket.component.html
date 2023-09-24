@@ -1,0 +1,221 @@
+<form [formGroup]="ticketForm" class="ui form">
+  <div class="field">
+    <div class="fields">
+      <div
+        class="six wide field"
+        [ngClass]="{
+          error:
+            ticketForm.get('time')!.invalid &&
+            (ticketForm.get('time')!.dirty ||
+              ticketForm.get('time')!.touched ||
+              isSubmitted)
+        }"
+      >
+        <label>Ώρα</label>
+
+        <input
+          type="text"
+          formControlName="time"
+          name="time"
+          placeholder="Ώρα"
+        />
+      </div>
+      <div
+        class="six wide field"
+        [ngClass]="{
+          error:
+            ticketForm.get('price')!.invalid &&
+            (ticketForm.get('price')!.dirty ||
+              ticketForm.get('price')!.touched ||
+              isSubmitted)
+        }"
+      >
+        <label>Τιμή</label>
+
+        <input
+          type="text"
+          formControlName="price"
+          name="price"
+          placeholder="Τιμή"
+        />
+      </div>
+      <div class="six wide field">
+        <label>Κατηγορία</label>
+        <div
+          class="field"
+          [ngClass]="{
+            error: category.value === '' && isSubmitted
+          }"
+        >
+          <select
+            #category
+            class="ui fluid search dropdown"
+            name="month"
+            (change)="getEvents()"
+          >
+            <option value="">Κατηγορία</option>
+            <option value="Movies">Movies</option>
+            <option value="Music">Music</option>
+            <option value="event">event</option>
+            <option value="New">New</option>
+            <option value="Popular">Popular</option>
+            <option value="Recommended">Recommended</option>
+          </select>
+        </div>
+      </div>
+      <div class="six wide field">
+        <label>Event</label>
+        <div
+          class="field"
+          [ngClass]="{
+            error: event.value === '' && isSubmitted
+          }"
+        >
+          <select #event class="ui fluid search dropdown" name="socialType">
+            <option value="">Event</option>
+            <option *ngFor="let event of events" value="{{ event._id }}">
+              {{ event.title }} {{ event.date }} {{ event.category }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="fields">
+      <div class="nine wide field">
+        <label>Μήνας</label>
+        <div
+          class="field"
+          [ngClass]="{
+            error: socialType.value === '' && isSubmitted
+          }"
+        >
+          <select
+            #socialType
+            class="ui fluid search dropdown"
+            name="socialType"
+          >
+            <option value="">Τύπος Εισιτηρίου</option>
+            <option value="κανονικό">κανονικό</option>
+            <option value="εκπτωτικό">εκπτωτικό</option>
+          </select>
+        </div>
+      </div>
+      <div
+        class="nine wide field"
+        [ngClass]="{
+          error:
+            ticketForm.get('seats')!.invalid &&
+            (ticketForm.get('seats')!.dirty ||
+              ticketForm.get('seats')!.touched ||
+              isSubmitted)
+        }"
+      >
+        <label>Θέσεις</label>
+
+        <input
+          type="text"
+          pattern="\d*"
+          formControlName="seats"
+          name="seats"
+          min="1"
+          maxlength="4"
+          placeholder="Διαθέσιμες θέσεις"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="fields">
+      <div
+        class="six wide field"
+        [ngClass]="{
+          error:
+            ticketForm.get('day')!.invalid &&
+            (ticketForm.get('day')!.dirty ||
+              ticketForm.get('day')!.touched ||
+              isSubmitted)
+        }"
+      >
+        <label>Ημέρα</label>
+        <input
+          type="text"
+          pattern="\d*"
+          min="1"
+          max="31"
+          maxlength="2"
+          formControlName="day"
+          name="day"
+          placeholder="Ημέρα"
+        />
+      </div>
+
+      <div class="six wide field">
+        <label>Μήνας</label>
+        <div
+          class="field"
+          [ngClass]="{
+            error: month.value === '' && isSubmitted
+          }"
+        >
+          <select #month class="ui fluid search dropdown" name="month">
+            <option value="">Μήνας</option>
+            <option value="1">Ιανουάριος</option>
+            <option value="2">Φεβρουάριος</option>
+            <option value="3">Μάρτιος</option>
+            <option value="4">Απρίλιος</option>
+            <option value="5">Μάιος</option>
+            <option value="6">Ιούνιος</option>
+            <option value="7">Ιούλιος</option>
+            <option value="8">Αύγουστος</option>
+            <option value="9">Σεπτέβριος</option>
+            <option value="10">Οκτώβριος</option>
+            <option value="11">Νοέμβριος</option>
+            <option value="12">Δεκέμβριος</option>
+          </select>
+        </div>
+      </div>
+      <div
+        class="six wide field"
+        [ngClass]="{
+          error:
+            ticketForm.get('year')!.invalid &&
+            (ticketForm.get('year')!.dirty ||
+              ticketForm.get('year')!.touched ||
+              isSubmitted)
+        }"
+      >
+        <label>Έτος</label>
+
+        <input
+          type="text"
+          pattern="\d*"
+          formControlName="year"
+          name="year"
+          min="2023"
+          maxlength="4"
+          placeholder="Έτος"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="button-wrapper">
+    <div
+      class="ui button purple right"
+      (click)="submit(ticketForm)"
+      tabindex="0"
+    >
+      Αποθήκευση
+    </div>
+  </div>
+  <div
+    *ngIf="(ticketForm.invalid && isSubmitted) || errorReturned"
+    class="ui error message"
+  >
+    Υπάρχουν κάποια λάθη!!
+  </div>
+</form>

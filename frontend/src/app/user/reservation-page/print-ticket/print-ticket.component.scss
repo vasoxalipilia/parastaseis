@@ -1,0 +1,59 @@
+/* ticket.component.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.ticket {
+  width: 50rem;
+  height: 55rem;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin: 3rem;
+}
+
+.ticket-header {
+  text-align: center;
+}
+
+.ticket-title {
+  font-size: 20px;
+  margin: 5px 0;
+}
+
+.ticket-body {
+  margin-top: 15px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.ticket-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+// .event-info {
+//   width: 70%;
+// }
+
+.ticket-number {
+  width: 100%;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}

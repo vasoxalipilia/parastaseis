@@ -1,0 +1,55 @@
+<app-header></app-header>
+
+<!-- login.component.html -->
+<div class="ui middle aligned center aligned grid login-form-wrapper">
+  <div class="column login-form">
+    <h2 class="ui teal image header">
+      <div class="content">Login</div>
+    </h2>
+    <form [formGroup]="theLoginForm" class="ui large form">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="mail icon"></i>
+            <input
+              formControlName="username"
+              class="form-row"
+              type="email"
+              placeholder="E-mail address"
+            />
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input
+              formControlName="password"
+              type="password"
+              name="password"
+              class="form-row"
+              placeholder="Password"
+            />
+          </div>
+        </div>
+        <button
+          class="ui massive fluid teal submit button"
+          (click)="login(theLoginForm)"
+        >
+          Login
+        </button>
+      </div>
+
+      <div
+        *ngIf="(theLoginForm.invalid && isSubmitted) || errorReturned"
+        class="ui error message"
+      >
+        Λάθος username ή password!!
+      </div>
+    </form>
+
+    <div class="ui massive message">
+      New to us? <a routerLink="/signup">Sign Up</a>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

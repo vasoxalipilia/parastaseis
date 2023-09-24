@@ -1,0 +1,32 @@
+version: "3.8"
+
+networks:
+  parastaseis_net:
+    external: true
+
+services:
+  parastaseis-frontend:
+    # image: parastaseis_frontend:latest
+    image: parastaseis_frontend:dev
+    volumes:
+      - ./frontend:/app
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - parastaseis_net
+
+  parastaseis-backend:
+    # image: parastaseis_backend:latest
+    image: parastaseis_backend:dev
+    depends_on:
+      - mongo
+    volumes:
+      - ./backend:/app
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017
+      SALT: $$2b$$10$$ZDX7eyQ1Ornf62rKqjlwBO
+      # ME_ CONFIG_MONGODB_URL: mongodb://mongo:27017/parastaseis
+    networks:
+      - parastaseis_net

@@ -1,0 +1,10 @@
+<!-- carousel large screen -->
+<div class="hero" *ngIf="!isSmallScreen">
+  <app-hero-text></app-hero-text>
+  <app-custom-carousel [slides]="slides"></app-custom-carousel>
+</div>
+<!-- carousel mobile screen-->
+<div class="hero" *ngIf="isSmallScreen">
+  <app-custom-carousel [slides]="slides"></app-custom-carousel>
+  <app-hero-text></app-hero-text>
+</div>

@@ -1,0 +1,24 @@
+.table-wrapper {
+  margin-top: 3rem;
+}
+
+.my-button {
+  font-size: 1.4rem !important;
+
+  background-color: #d1787891 !important;
+}
+
+.my-button:hover {
+  background-color: #d17878 !important;
+}
+
+.ui.pointing.label:before,
+.ui[class*="pointing above"].label:before {
+  transform: translateX(-50%) translateY(-50%) rotate(-50deg);
+  top: 50%;
+  left: 0;
+}
+
+.ui.label {
+  font-size: 1.1rem;
+}

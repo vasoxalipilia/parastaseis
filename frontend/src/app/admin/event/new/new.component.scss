@@ -1,0 +1,71 @@
+/* picture-upload.component.css */
+.ui.segment {
+  max-width: 400px;
+  margin: 50px auto;
+}
+
+.ui.header {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.ui.action.input {
+  display: flex;
+  align-items: center;
+}
+
+.ui.action.input input[type="file"] {
+  display: none;
+}
+
+.ui.primary.button {
+  margin-left: 10px;
+}
+
+.ui.message {
+  margin-top: 1rem;
+  padding: 10px;
+}
+
+.ui.form input {
+  line-height: 2.2rem;
+}
+
+.ui.segment {
+  max-width: none;
+  margin: 0;
+}
+
+.container {
+  margin-top: 3rem;
+}
+
+.ui.button,
+.ui.search,
+.ui.form textarea,
+.ui.form input[type="text"],
+.ui.form input[type="number"],
+.ui.form .field > label {
+  font-size: 1.2rem;
+}
+
+.ui.dividing.header {
+  width: 75%;
+}
+
+.button-wrapper {
+  margin-top: 3%;
+}
+
+.ui.segment.error {
+  background: #fff6f6;
+}
+
+.ui.error.message {
+  display: block;
+  width: 75%;
+}
+
+.ui.message {
+  font-size: 1.5rem;
+}
