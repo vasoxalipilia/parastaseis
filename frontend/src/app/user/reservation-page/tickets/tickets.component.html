@@ -1,0 +1,46 @@
+<div class="ui container table-wrapper">
+  <table class="ui striped table">
+    <thead>
+      <tr>
+        <th>Ημερομηνία</th>
+        <th>Τιμή</th>
+        <th>Εισιτήριο</th>
+        <th>Διαθέσιμα</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let ticket of tickets">
+        <tr *ngIf="ticket.socialType === 'κανονικό'">
+          <td>{{ ticket.time }} {{ ticket.date }}</td>
+          <td>{{ ticket.price }} &euro;</td>
+          <td>{{ ticket.socialType }}</td>
+          <td>{{ ticket.seats }}</td>
+          <td class="ui center aligned">
+            <button
+              [disabled]="+ticket.seats <= 0"
+              class="ui massive teal button my-button"
+              (click)="buyTicket(event, ticket)"
+            >
+              Αγορά Εισιτηρίου
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="ticket.socialType === 'εκπτωτικό'">
+          <td>{{ ticket.time }} {{ ticket.date }}</td>
+          <td>{{ ticket.price }} &euro;</td>
+          <td>{{ ticket.socialType }}</td>
+          <td>{{ ticket.seats }}</td>
+          <td class="ui center aligned">
+            <button
+              class="ui massive teal button my-button"
+              (click)="buyTicket(event, ticket)"
+            >
+              Αγορά Εισιτηρίου
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,7 @@
+<div class="ui massive breadcrumb">
+  <a class="section" routerLink="/">Home</a>
+  <ng-container *ngFor="let breadcrumb of breadcrumbs">
+    <i class="right angle icon divider"></i>
+    <a class="section" [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a>
+  </ng-container>
+</div>

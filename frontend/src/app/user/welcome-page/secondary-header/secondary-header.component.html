@@ -1,0 +1,14 @@
+<div #secondary_header class="ui secondary pointing menu">
+  <a id="img" class="item" href="#hero">
+    <img src="assets/images/logo-secondary.webp"
+  /></a>
+  <a
+    #menu_element
+    *ngFor="let item of header_items"
+    (click)="toggleItem(menu_element); scroll(item.id)"
+    class="item"
+    href="#{{ item.id }}"
+  >
+    {{ item.title }}
+  </a>
+</div>

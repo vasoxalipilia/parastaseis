@@ -1,0 +1,47 @@
+<div class="ui container">
+  <div class="ticket-wrapper">
+    <div class="ticket">
+      <img class="ui fluid image" src="{{ event.coverImage }}" />
+
+      <div class="ticket-header">
+        <h1 class="ticket-title">Εισιτήριο</h1>
+      </div>
+      <div class="ticket-body">
+        <div class="ticket-details">
+          <div class="event-info">
+            <p><strong>Event:</strong>{{ event.title }}</p>
+            <p><strong>Ημερομηνία:</strong> {{ ticket.date }}</p>
+            <p><strong>Τοποθεσία:</strong> {{ event.location }}</p>
+          </div>
+          <div class="right-column">
+            <div class="ticket-number">
+              <p><strong>TicketNo:</strong> {{ randomString }}</p>
+            </div>
+            <div class="ticket-number">
+              <p><strong>Όνομα:</strong> {{ shippingInformation.firstname }}</p>
+            </div>
+            <div class="ticket-number">
+              <p>
+                <strong>Επίθετο:</strong> {{ shippingInformation.lastname }}
+              </p>
+            </div>
+            <div class="ticket-number">
+              <p><strong>Τύπος εισιτηρίου:</strong> {{ ticket.socialType }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="ticket-barcode">
+          <canvas #qrcodeCanvas></canvas>
+          <!-- Add barcode or QR code here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="button-wrapper">
+    <div class="ui row">
+      <button class="ui massive button" (click)="downloadPDF()">
+        Λήψη Εισιτηρίου
+      </button>
+    </div>
+  </div>
+</div>

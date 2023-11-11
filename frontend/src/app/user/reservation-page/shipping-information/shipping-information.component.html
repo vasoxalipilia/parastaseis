@@ -1,0 +1,445 @@
+<form [formGroup]="shippingForm" class="ui form">
+  <h4 class="ui dividing header">Στοιχεία Πίστωσης</h4>
+  <div class="field">
+    <label>Όνομα</label>
+    <div class="two fields">
+      <div
+        class="field"
+        [ngClass]="{
+          error:
+            shippingForm.get('firstname')!.invalid &&
+            (shippingForm.get('firstname')!.dirty ||
+              shippingForm.get('firstname')!.touched ||
+              isSubmitted)
+        }"
+      >
+        <input
+          type="text"
+          formControlName="firstname"
+          name="shipping[first-name]"
+          placeholder="Όνομα"
+        />
+      </div>
+      <div
+        class="field"
+        [ngClass]="{
+          error:
+            shippingForm.get('lastname')!.invalid &&
+            (shippingForm.get('lastname')!.dirty ||
+              shippingForm.get('lastname')!.touched ||
+              isSubmitted)
+        }"
+      >
+        <input
+          type="text"
+          formControlName="lastname"
+          name="shipping[last-name]"
+          placeholder="Επίθετο"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label>Διεύθυνση</label>
+    <div class="fields">
+      <div
+        class="twelve wide field"
+        [ngClass]="{
+          error:
+            shippingForm.get('shippingAddress')!.invalid &&
+            (shippingForm.get('shippingAddress')!.dirty ||
+              shippingForm.get('shippingAddress')!.touched ||
+              isSubmitted)
+        }"
+      >
+        <input
+          type="text"
+          formControlName="shippingAddress"
+          name="shipping[address]"
+          placeholder="Διεύθυνση"
+        />
+      </div>
+      <div
+        class="four wide field"
+        [ngClass]="{
+          error:
+            shippingForm.get('postalCode')!.invalid &&
+            (shippingForm.get('postalCode')!.dirty ||
+              shippingForm.get('postalCode')!.touched ||
+              isSubmitted)
+        }"
+      >
+        <input
+          type="text"
+          formControlName="postalCode"
+          name="shipping[address-2]"
+          placeholder="Τ.Κ."
+        />
+      </div>
+    </div>
+  </div>
+  <div class="fields">
+    <div
+      class="twelve wide field"
+      [ngClass]="{
+        error:
+          shippingForm.get('shippingCity')!.invalid &&
+          (shippingForm.get('shippingCity')!.dirty ||
+            shippingForm.get('shippingCity')!.touched ||
+            isSubmitted)
+      }"
+    >
+      <input
+        type="text"
+        formControlName="shippingCity"
+        name="shipping[city]"
+        placeholder="Περιφέρεια"
+      />
+    </div>
+    <div
+      class="four wide field"
+      [ngClass]="{
+        error:
+          shippingForm.get('shippingTown')!.invalid &&
+          (shippingForm.get('shippingTown')!.dirty ||
+            shippingForm.get('shippingTown')!.touched ||
+            isSubmitted)
+      }"
+    >
+      <input
+        type="text"
+        formControlName="shippingTown"
+        name="shipping[town]"
+        placeholder="Δήμος/Πόλη/Χωριό"
+      />
+    </div>
+  </div>
+
+  <h4 class="ui dividing header">Στοιχεία Πληρωμής</h4>
+  <div
+    class="field"
+    [ngClass]="{
+      error:
+        shippingForm.get('cardType')!.invalid &&
+        (shippingForm.get('cardType')!.dirty ||
+          shippingForm.get('cardType')!.touched ||
+          isSubmitted)
+    }"
+  >
+    <label>Κάρτα</label>
+    <div
+      class="ui selection dropdown"
+      (click)="toggleOpen()"
+      [ngClass]="{ active: isOpen, visible: isOpen }"
+    >
+      <input
+        #cardTypeInput
+        formControlName="cardType"
+        type="hidden"
+        name="card[type]"
+      />
+      <div #cardTypeText class="default text">Τύπος Κάρτας</div>
+      <i class="dropdown icon"></i>
+      <div
+        class="menu transition"
+        [ngClass]="{ visible: isOpen, hidden: !isOpen }"
+      >
+        <div
+          *ngFor="let cardType of cardTypes"
+          (click)="
+            showSelection(cardType);
+            shippingForm.get('cardType')!.setValue(cardType.title)
+          "
+          class="item"
+        >
+          <i class="cc {{ cardType.value }} icon"></i>
+          {{ cardType.title }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fields">
+    <div
+      class="seven wide field"
+      [ngClass]="{
+        error:
+          shippingForm.get('cardNumber')!.invalid &&
+          (shippingForm.get('cardNumber')!.dirty ||
+            shippingForm.get('cardNumber')!.touched ||
+            isSubmitted)
+      }"
+    >
+      <label>Αριθμός Κάρτας</label>
+      <input
+        type="text"
+        formControlName="cardNumber"
+        name="card[number]"
+        maxlength="16"
+        placeholder="Κάρτα #"
+      />
+    </div>
+    <div
+      class="three wide field"
+      [ngClass]="{
+        error:
+          shippingForm.get('cardCvc')!.invalid &&
+          (shippingForm.get('cardCvc')!.dirty ||
+            shippingForm.get('cardCvc')!.touched ||
+            isSubmitted)
+      }"
+    >
+      <label>CVC</label>
+      <input
+        type="text"
+        formControlName="cardCvc"
+        name="card[cvc]"
+        maxlength="3"
+        placeholder="CVC"
+      />
+    </div>
+    <div class="six wide field">
+      <label>Λήξη</label>
+      <div class="two fields">
+        <div
+          class="field"
+          [ngClass]="{
+            error:
+              shippingForm.get('expirationDate')!.invalid &&
+              (shippingForm.get('expirationDate')!.dirty ||
+                shippingForm.get('expirationDate')!.touched ||
+                isSubmitted) &&
+              !cardMonth.value
+          }"
+        >
+          <select
+            #cardMonth
+            class="ui fluid search dropdown"
+            name="card[expire-month]"
+          >
+            <option value="">Μήνας</option>
+            <option value="1">Ιανουάριος</option>
+            <option value="2">Φεβρουάριος</option>
+            <option value="3">Μάρτιος</option>
+            <option value="4">Απρίλιος</option>
+            <option value="5">Μάιος</option>
+            <option value="6">Ιούνιος</option>
+            <option value="7">Ιούλιος</option>
+            <option value="8">Αύγουστος</option>
+            <option value="9">Σεπτέβριος</option>
+            <option value="10">Οκτώβριος</option>
+            <option value="11">Νοέμβριος</option>
+            <option value="12">Δεκέμβριος</option>
+          </select>
+        </div>
+        <div
+          class="field"
+          [ngClass]="{
+            error:
+              shippingForm.get('expirationDate')!.invalid &&
+              (shippingForm.get('expirationDate')!.dirty ||
+                shippingForm.get('expirationDate')!.touched ||
+                isSubmitted)
+          }"
+        >
+          <input
+            type="text"
+            formControlName="expirationDate"
+            name="card[expire-year]"
+            maxlength="4"
+            placeholder="Έτος"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <h4 class="ui dividing header">Απόδειξη</h4>
+  <div class="ui segment">
+    <div class="field">
+      <div
+        class="ui toggle checkbox"
+        [ngClass]="{ checked: isChecked }"
+        (click)="toggleChecked()"
+      >
+        <input
+          #checkInput
+          type="checkbox"
+          formControlName="asShipping"
+          name="asShipping"
+          tabindex="0"
+          class="hidden"
+          [checked]="isChecked"
+        />
+        <label>Ίδια με τα στοιχεία αποστολής</label>
+      </div>
+    </div>
+    <div
+      class="field"
+      [ngClass]="{
+        error:
+          (shippingForm.get('receiptFirstname')!.invalid &&
+            (shippingForm.get('receiptFirstname')!.dirty ||
+              shippingForm.get('receiptFirstname')!.touched ||
+              isSubmitted) &&
+            !isChecked) ||
+          ((shippingForm.get('receiptFirstname')!.dirty ||
+            shippingForm.get('receiptFirstname')!.touched ||
+            isSubmitted) &&
+            isChecked &&
+            shippingForm.get('firstname')!.invalid)
+      }"
+    >
+      <label>Όνομα</label>
+      <div class="two fields">
+        <div class="field">
+          <input
+            type="text"
+            formControlName="receiptFirstname"
+            name="receipt[first-name]"
+            placeholder="Όνομα"
+          />
+        </div>
+        <div
+          class="field"
+          [ngClass]="{
+            error:
+              (shippingForm.get('receiptLastname')!.invalid &&
+                (shippingForm.get('receiptLastname')!.dirty ||
+                  shippingForm.get('receiptLastname')!.touched ||
+                  isSubmitted) &&
+                !isChecked) ||
+              ((shippingForm.get('receiptLastname')!.dirty ||
+                shippingForm.get('receiptLastname')!.touched ||
+                isSubmitted) &&
+                isChecked &&
+                shippingForm.get('lastname')!.invalid)
+          }"
+        >
+          <input
+            type="text"
+            formControlName="receiptLastname"
+            name="receipt[last-name]"
+            placeholder="Επίθετο"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Στοιχεία Αποστολής</label>
+      <div class="fields">
+        <div
+          class="twelve wide field"
+          [ngClass]="{
+            error:
+              (shippingForm.get('receiptAddress')!.invalid &&
+                (shippingForm.get('receiptAddress')!.dirty ||
+                  shippingForm.get('receiptAddress')!.touched ||
+                  isSubmitted) &&
+                !isChecked) ||
+              ((shippingForm.get('receiptAddress')!.dirty ||
+                shippingForm.get('receiptAddress')!.touched ||
+                isSubmitted) &&
+                isChecked &&
+                shippingForm.get('shippingAddress')!.invalid)
+          }"
+        >
+          <input
+            type="text"
+            formControlName="receiptAddress"
+            name="receipt[address]"
+            placeholder="Διεύθυνση"
+          />
+        </div>
+        <div
+          class="four wide field"
+          [ngClass]="{
+            error:
+              (shippingForm.get('receiptPostalcode')!.invalid &&
+                (shippingForm.get('receiptPostalcode')!.dirty ||
+                  shippingForm.get('receiptPostalcode')!.touched ||
+                  isSubmitted) &&
+                !isChecked) ||
+              ((shippingForm.get('receiptPostalcode')!.dirty ||
+                shippingForm.get('receiptPostalcode')!.touched ||
+                isSubmitted) &&
+                isChecked &&
+                shippingForm.get('postalCode')!.invalid)
+          }"
+        >
+          <input
+            type="text"
+            formControlName="receiptPostalcode"
+            name="receipt[address-2]"
+            placeholder="Τ.Κ."
+          />
+        </div>
+      </div>
+    </div>
+    <div class="fields">
+      <div
+        class="twelve wide field"
+        [ngClass]="{
+          error:
+            (shippingForm.get('receiptCity')!.invalid &&
+              (shippingForm.get('receiptCity')!.dirty ||
+                shippingForm.get('receiptCity')!.touched ||
+                isSubmitted) &&
+              !isChecked) ||
+            ((shippingForm.get('receiptCity')!.dirty ||
+              shippingForm.get('receiptCity')!.touched ||
+              isSubmitted) &&
+              isChecked &&
+              shippingForm.get('shippingCity')!.invalid)
+        }"
+      >
+        <input
+          type="text"
+          formControlName="receiptCity"
+          name="receipt[city]"
+          placeholder="Περιφέρεια"
+        />
+      </div>
+      <div
+        class="four wide field"
+        [ngClass]="{
+          error:
+            (shippingForm.get('receiptTown')!.invalid &&
+              (shippingForm.get('receiptTown')!.dirty ||
+                shippingForm.get('receiptTown')!.touched ||
+                isSubmitted) &&
+              !isChecked) ||
+            ((shippingForm.get('receiptTown')!.dirty ||
+              shippingForm.get('receiptTown')!.touched ||
+              isSubmitted) &&
+              isChecked &&
+              shippingForm.get('shippingTown')!.invalid)
+        }"
+      >
+        <input
+          type="text"
+          formControlName="receiptTown"
+          name="receipt[town]"
+          placeholder="Δήμος/Πόλη/Χωριό"
+        />
+      </div>
+    </div>
+  </div> -->
+  <div class="button-wrapper">
+    <div class="ui button my-button" tabindex="0" (click)="previous()">
+      Προηγούμενο
+    </div>
+    <div
+      class="ui button my-button right"
+      (click)="submit(shippingForm)"
+      tabindex="0"
+    >
+      Αγορά
+    </div>
+  </div>
+  <div
+    *ngIf="(shippingForm.invalid && isSubmitted) || errorReturned"
+    class="ui error message"
+  >
+    Υπάρχουν κάποια λάθη!!
+  </div>
+</form>

@@ -1,0 +1,131 @@
+<nav>
+  <div class="ui menu">
+    <div class="item" id="normal-menu">
+      <div
+        class="ui dropdown link item"
+        appDropdown
+        [dropdownVisible]="false"
+        *ngFor="let item of menuItems"
+      >
+        <span>{{ item.label }}</span>
+        <ul class="menu transition">
+          <div
+            *ngFor="let subItem of item.subItems"
+            class="item link"
+            [routerLink]="subItem.routerLink"
+          >
+            {{ subItem.label }}
+          </div>
+        </ul>
+      </div>
+
+      <div
+        *ngIf="!(isAuthenticated$ | async)"
+        class="item link"
+        routerLink="/login"
+        routerLinkActive="active"
+      >
+        Login
+      </div>
+      <div
+        *ngIf="isAuthenticated$ | async"
+        class="ui dropdown link item"
+        appDropdown
+        [dropdownVisible]="false"
+      >
+        <span>{{ userFirstName }}</span>
+        <ul class="menu transition">
+          <div
+            class="item link"
+            routerLink="/mytickets"
+            routerLinkActive="active"
+          >
+            Εσιτήρια
+          </div>
+          <div class="item link" routerLink="/logout" (click)="logout()">
+            Logout
+          </div>
+        </ul>
+      </div>
+
+      <div
+        *ngIf="!(isAuthenticated$ | async)"
+        class="item link"
+        routerLink="/signup"
+        routerLinkActive="active"
+      >
+        Signup
+      </div>
+    </div>
+
+    <div
+      class="ui left dropdown link item"
+      id="hamburger"
+      appDropdown
+      [dropdownVisible]="false"
+    >
+      <span> <i class="bars icon"></i></span>
+      <ul class="menu transition">
+        <div
+          class="item link"
+          routerLink="/mytickets"
+          routerLinkActive="active"
+        >
+          <div
+            class="ui left dropdown link item"
+            appDropdown
+            [dropdownVisible]="false"
+            *ngFor="let item of menuItems"
+          >
+            <span class="text">{{ item.label }}</span>
+            <i class="dropdown icon"></i>
+            <ul class="menu transition">
+              <div
+                *ngFor="let subItem of item.subItems"
+                class="item link"
+                [routerLink]="subItem.routerLink"
+              >
+                {{ subItem.label }}
+              </div>
+            </ul>
+          </div>
+          <div
+            class="item link"
+            routerLink="/mytickets"
+            routerLinkActive="active"
+            *ngIf="isAuthenticated$ | async"
+          >
+            Εσιτήρια
+          </div>
+          <div
+            *ngIf="!(isAuthenticated$ | async)"
+            class="item link"
+            routerLink="/login"
+            routerLinkActive="active"
+          >
+            Login
+          </div>
+          <div
+            *ngIf="!(isAuthenticated$ | async)"
+            class="item link"
+            routerLink="/signup"
+            routerLinkActive="active"
+          >
+            Signup
+          </div>
+          <div
+            *ngIf="isAuthenticated$ | async"
+            class="item link"
+            routerLink="/logout"
+            (click)="logout()"
+          >
+            Logout
+          </div>
+        </div>
+      </ul>
+    </div>
+    <a id="home-button" routerLink="/">
+      <img src="assets/images/logo.webp" />
+    </a>
+  </div>
+</nav>

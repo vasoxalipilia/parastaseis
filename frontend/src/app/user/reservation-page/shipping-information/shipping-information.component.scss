@@ -1,0 +1,62 @@
+.ui.form {
+  font-size: 1.3rem;
+  margin-top: 3rem;
+}
+
+h4.ui.header {
+  font-size: 1.5rem;
+  margin-top: 6rem;
+  margin-bottom: 1rem;
+}
+
+.ui.button {
+  font-size: 1.3rem;
+}
+
+.ui.form .field > label {
+  font-size: 1.3rem;
+}
+
+input,
+.ui.search,
+.ui.segment,
+.ui.checkbox,
+.ui.dropdown .menu > .item {
+  font-size: 1.3rem !important;
+}
+
+.ui.checkbox label {
+  font-size: 1.5rem;
+}
+
+.button-wrapper {
+  position: relative;
+}
+
+.right {
+  position: absolute;
+  right: 0;
+}
+
+.my-button {
+  font-size: 1.4rem !important;
+  color: #ffffff;
+  background-color: #d1787891 !important;
+}
+
+.my-button:hover {
+  color: #ffffff;
+  background-color: #d17878 !important;
+}
+
+.my-button:focus {
+  color: #ffffff;
+}
+
+.ui.error.message {
+  display: block;
+}
+
+.ui.message {
+  font-size: 1.5rem;
+}

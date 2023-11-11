@@ -1,0 +1,20 @@
+<div class="carousel-wrapper">
+  <div class="carousel-background"></div>
+  <div class="carousel slideshow">
+    <img
+      class="slide"
+      [src]="slides[currentSlide]"
+      alt="Slide"
+      [@carouselAnimation]
+      (mouseover)="stopSlideShow()"
+      (mouseout)="slideShow()"
+    />
+
+    <button class="ui icon button left" (click)="onPreviousClick()">
+      <i class="chevron circle left icon"></i>
+    </button>
+    <button class="ui icon button right" (click)="onNextClick()">
+      <i class="chevron circle right icon"></i>
+    </button>
+  </div>
+</div>

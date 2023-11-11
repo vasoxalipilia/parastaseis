@@ -1,0 +1,16 @@
+<div class="ui stackable grid">
+  <div
+    class="four wide mobile six wide tablet four wide computer column"
+    *ngFor="let event of events"
+  >
+    <div class="ui card" (click)="navigateToLink(event)">
+      <div class="image">
+        <img [src]="event.simpleImage" />
+      </div>
+      <div class="content">
+        <div class="header">{{ event.title }}</div>
+        <div class="description">{{ event.description | slice : 0 : 100 }}</div>
+      </div>
+    </div>
+  </div>
+</div>

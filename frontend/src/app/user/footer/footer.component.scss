@@ -1,0 +1,55 @@
+footer {
+  background-color: #fafafa;
+  padding: 3em 0;
+}
+
+footer h4.ui.header {
+  color: #333;
+}
+
+footer .column {
+  padding: 0;
+}
+
+footer .column .link.list {
+  margin: 0;
+  padding: 1em 0;
+}
+
+footer .column .link.list .item {
+  color: #555;
+}
+
+footer .column .link.list .item:hover {
+  color: #f0a2bc;
+}
+
+.ui.inverted.segment {
+  background: #fafafa;
+}
+
+.my-segment {
+  margin-top: 5rem !important;
+}
+
+.ui.list,
+h4.ui.header {
+  font-size: 1.5rem;
+}
+
+.ui.inverted.list > a.item > .icon {
+  color: #555;
+}
+
+.social {
+  display: flex;
+  font-size: 3rem !important;
+}
+
+.social a.item {
+  margin: 0 3%;
+}
+
+.ui.list > .item:first-child {
+  padding-top: 0.8rem;
+}
